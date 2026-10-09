@@ -212,7 +212,7 @@ class WebSearchTool(BaseTool):
         params = self._verify_json_format_args(params)
         query = params["query"]
 
-        url = "https://google.serper.dev/search"
+        url = f'{os.getenv("SERPER_BASE_URL", "https://google.serper.dev").rstrip("/")}/search'
         payload = json.dumps({"q": query})
         headers_serper = {
             'X-API-KEY': self.api_key,
@@ -282,7 +282,7 @@ class BatchWebSearchTool(WebSearchTool):
         if isinstance(queries, str):
             queries = [queries]
 
-        url = "https://google.serper.dev/search"
+        url = f'{os.getenv("SERPER_BASE_URL", "https://google.serper.dev").rstrip("/")}/search'
         headers_serper = {
             'X-API-KEY': self.api_key,
             'Content-Type': 'application/json'
